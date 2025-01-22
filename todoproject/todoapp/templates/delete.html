@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css"
+    />
+
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+
+    <title>Delete Confirmation</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white">
+          <h4 class="text-center">
+            <i class="fas fa-exclamation-triangle"></i> Confirm Delete
+          </h4>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <p class="text-center fs-5">
+              Are you sure you want to delete <strong>"{{ object }}"</strong>?
+            </p>
+            <div class="text-center">
+              {{ form }}
+              <button type="submit" class="btn btn-danger me-2">
+                <i class="fas fa-trash-alt"></i> Confirm
+              </button>
+              <a href="{% url 'list_view' %}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

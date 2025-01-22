@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <!-- https://cdnjs.com/libraries/twitter-bootstrap/5.0.0-beta1 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css" />
+
+    <!-- Icons: https://getbootstrap.com/docs/5.0/extend/icons/ -->
+    <!-- https://cdnjs.com/libraries/font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container  m-5 d-flex flex-column align-items-center justify-content-center">
+        
+        <div class="w-50 p-5 border shadow bg-info ">
+            <form action="" method="post">
+                <h1 class="text-center text-primary">SignIn Form</h1>
+                {% if messages %}
+                {% for i in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{i}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% csrf_token%}
+                {{form}}
+                <br>
+                <div class="d-flex justify-content-between mt-5">
+                    <input type="submit" class="btn btn-primary" value="Login">
+                    <a href="{% url 'signup_view' %}" >New User? Signup</a>
+
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css" />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>All Todos</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #28a745;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .btn-light {
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-light:hover {
+            background-color: #28a745;
+            color: white;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container d-flex align-items-center p-5 justify-content-center">
+        <div class="row w-100">
+            <h1>HERE IS YOUR ALL TODOS</h1>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for todo in todos %}
+                <div class="col">
+                    <div class="card border-0 shadow-sm" style="background-color: #d4edda;">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">Title: {{ todo.title }}</h5>
+                            <p class="card-text text-muted">Description: {{ todo.description }}</p>
+                            <p class="card-text text-muted">Date: {{ todo.date }}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-transparent border-0">
+                            <a href="{% url 'delete_view' todo.id %}" class="btn btn-light">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                            <a href="{% url 'edit_view' todo.id %}" class="btn btn-light">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
