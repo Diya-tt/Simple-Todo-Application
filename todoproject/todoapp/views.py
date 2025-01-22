@@ -16,7 +16,7 @@ class Home(TemplateView):
     template_name='index.html'
 
 
-class SignInView(CreateView):               #grenericview
+class SignInView(CreateView):              
     template_name='signin.html'
     form_class=UserLoginForm
     model=User
@@ -36,11 +36,11 @@ class SignUpView(CreateView): # generic method
     template_name='signup.html'
     form_class=UserRegisterForm
     model=User
-    # success_url=reverse_lazy('signin_view') #not encrypted 
+   
 
     def form_valid(self,form):
         User.objects.create_user(**form.cleaned_data )
-        messages.success(self.request,"REGISTRATON SUCCESSFUL") #if we want to pass message, we should pass form_valid()
+        messages.success(self.request,"REGISTRATON SUCCESSFUL")
         return redirect('signin_view')
     
 
@@ -55,34 +55,33 @@ class SignOutView(View):
         return redirect("signin_view")
     
 
-class  TodoCreateView(CreateView):  #generic method
-    template_name='create.html'
+class  TodoCreateView(CreateView): 
     form_class=TodoForm
     model=TodoModel
-    success_url =reverse_lazy('home_view')  #not encrypted. but no prblm.redirect into this page
+    success_url =reverse_lazy('home_view') 
 
     def form_valid(self,form):
         form.instance.user=self.request.user
         messages.success(self.request,"Todo added")
         return super().form_valid(form)
     
-class TodoListView(ListView):   #generic method 
+class TodoListView(ListView): 
     template_name='list.html' 
     model=TodoModel
-    context_object_name="todos"  #all data of all user
+    context_object_name="todos" 
 
     def get_queryset(self):
         return TodoModel.objects.filter(user=self.request.user)
     
-class TodoDeleteView(DeleteView): #(here they ask confirmtion) #generic method0
+class TodoDeleteView(DeleteView):
     model=TodoModel
     pk_url_kwarg='id'
     success_url=reverse_lazy('list_view')
     template_name='delete.html'
 
-class TodoEditView(UpdateView):  #generic method
+class TodoEditView(UpdateView): 
     form_class=TodoEditForm
     template_name='edit.html'
     model=TodoModel
-    pk_url_kwarg="id" #-f url le pk instead if id
+    pk_url_kwarg="id" 
     success_url=reverse_lazy('list_view')
